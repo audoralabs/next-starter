@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# next-starter
 
-## Getting Started
+An opinionated, production-ready Next.js starter maintained by AudoraLabs. This template reflects the tooling and conventions we use to ship products quickly without compromising on quality.
 
-First, run the development server:
+## Why This Exists
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Starting a new project shouldn't mean spending a day configuring TypeScript, linting, formatting, and SEO defaults. This starter provides a clean foundation with sensible defaults so you can focus on building features.
+
+## Tech Stack
+
+- **Next.js 16** with App Router and React 19
+- **TypeScript** with strict mode enabled
+- **Bun** as the package manager and runtime
+- **Tailwind CSS 4** with PostCSS
+- **ESLint 9** flat config with Next.js rules
+- **Prettier** with Tailwind plugin
+- **React Compiler** enabled for automatic optimizations
+
+## Features
+
+- SEO-ready with `robots.ts`, `sitemap.ts`, and Open Graph metadata
+- Title templates and metadataBase configured
+- Path alias `@/*` mapped to `./src/*`
+- Dark mode support via CSS custom properties
+- Geist font family pre-configured
+
+## Folder Structure
+
+```
+src/
+├── app/
+│   ├── globals.css      # Tailwind imports and CSS variables
+│   ├── layout.tsx       # Root layout with metadata
+│   ├── page.tsx         # Home page
+│   ├── robots.ts        # robots.txt generation
+│   └── sitemap.ts       # Sitemap generation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Clone this template using degit:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+bunx degit AudoraLabs/next-starter my-project
+cd my-project
+bun install
+```
 
-## Learn More
+## Development
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Start development server
+bun dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Build for production
+bun run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Start production server
+bun start
 
-## Deploy on Vercel
+# Lint code
+bun lint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Format code
+bun format
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Check formatting
+bun format:check
+```
+
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and configure:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Base URL for sitemap, robots.txt, and Open Graph |
+
+## SEO Configuration
+
+This starter includes production-ready SEO defaults:
+
+- **`layout.tsx`** exports metadata with Open Graph and Twitter card support
+- **`robots.ts`** generates robots.txt with sitemap reference
+- **`sitemap.ts`** provides a dynamic sitemap template
+
+Update the metadata in `layout.tsx` and set `NEXT_PUBLIC_SITE_URL` to configure for your domain.
+
+## Opinionated Decisions
+
+**Bun over npm/yarn/pnpm**
+Faster installs, native TypeScript execution, and fewer moving parts. The lockfile is smaller and the CLI is simpler.
+
+**App Router only**
+The Pages Router is legacy. App Router provides better layouts, streaming, and server components out of the box.
+
+**React Compiler enabled**
+Automatic memoization without manual `useMemo` and `useCallback`. Less code, fewer bugs.
+
+**Tailwind CSS 4**
+Native CSS cascade layers, no config file needed for basic usage, and the new `@theme` directive for design tokens.
+
+**ESLint flat config**
+The new config format is cleaner and more composable. No `.eslintrc` files.
+
+**No component library**
+We prefer building UI from scratch with Tailwind. Add shadcn/ui or Radix if your project needs it.
+
+## How We Use This
+
+At AudoraLabs, this template is our starting point for client projects and internal tools. We clone it, customize the metadata, and start building. The conventions here reflect what we've found works well across dozens of projects.
+
+## License
+
+MIT
