@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { getMetadata, getViewport, getWebSiteJsonLd } from "@/lib/seo";
+import "@/styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,33 +13,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: {
-    default: "Next Starter",
-    template: "%s | Next Starter",
-  },
-  description: "Production-ready Next.js starter by AudoraLabs",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteUrl,
-    siteName: "Next Starter",
-    title: "Next Starter",
-    description: "Production-ready Next.js starter by AudoraLabs",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Next Starter",
-    description: "Production-ready Next.js starter by AudoraLabs",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export const metadata: Metadata = getMetadata();
+export const viewport: Viewport = getViewport();
 
 export default function RootLayout({
   children,
@@ -47,6 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          id="schema-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getWebSiteJsonLd()).replace(/</g, "\\u003c"),
+          }}
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
