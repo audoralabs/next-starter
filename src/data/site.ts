@@ -6,7 +6,8 @@ const SITE_DATA = {
   tagline: "Kickstart your Next.js projects effortlessly",
   description:
     "next-starter is a powerful, boilerplate project designed to accelerate the development of high-quality Next.js applications with best practices built-in.",
-  shortDescription: "A boilerplate to quickly launch robust Next.js apps with best practices.",
+  shortDescription:
+    "A boilerplate to quickly launch robust Next.js apps with best practices.",
 
   alternateNames: ["next-starter", "Next Starter", "NextJS Starter"],
 

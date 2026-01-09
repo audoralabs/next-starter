@@ -32,24 +32,24 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     scope: "/",
     screenshots: [
-      {
-        src: "/images/nextstarter_og_image.webp",
-        type: "image/webp",
-        sizes: "440x956",
-        form_factor: "narrow",
-      },
+      // {
+      //   src: "/images/nextstarter_og_image.webp",
+      //   type: "image/webp",
+      //   sizes: "440x956",
+      //   form_factor: "narrow",
+      // },
       //   {
       //     src: "/images/screenshot-mobile-light.webp",
       //     type: "image/webp",
       //     sizes: "440x956",
       //     form_factor: "narrow",
       //   },
-      //   {
-      //     src: "/images/screenshot-desktop-dark.webp",
-      //     type: "image/webp",
-      //     sizes: "1920x1080",
-      //     form_factor: "wide",
-      //   },
+      {
+        src: "/images/nextstarter-desktop-dark.webp",
+        type: "image/webp",
+        sizes: "1920x1080",
+        form_factor: "wide",
+      },
       //   {
       //     src: "/images/screenshot-desktop-light.webp",
       //     type: "image/webp",

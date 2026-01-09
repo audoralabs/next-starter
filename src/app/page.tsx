@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-neutral-950 px-6">
       <main className="max-w-xl text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
+        <p className="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase">
           AudoraLabs
         </p>
 
@@ -33,7 +33,8 @@ export default function Home() {
 
         <div className="mx-auto mt-12 max-w-md rounded-md border border-neutral-800 bg-neutral-900 p-4">
           <code className="text-sm text-neutral-300">
-            <span className="text-neutral-600">$</span> bunx degit audoralabs/next-starter my-app
+            <span className="text-neutral-600">$</span> bunx degit
+            audoralabs/next-starter my-app
           </code>
         </div>
       </main>

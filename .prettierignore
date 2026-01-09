@@ -1,3 +1,6 @@
+# Ignore artifacts:
 .next
+.husky
+public
 node_modules
-bun.lock
+
