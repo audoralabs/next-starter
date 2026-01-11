@@ -1,7 +1,7 @@
 const SITE_DATA = {
   name: "next-starter",
   url: "https://www.nextstarter.com",
-  ogImage: "https://www.nextstarter.com/images/nextstarter_og_image.webp",
+  ogImage: "https://www.nextstarter.com/images/screenshot-desktop-light.webp",
 
   tagline: "Kickstart your Next.js projects effortlessly",
   description:

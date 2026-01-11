@@ -23,12 +23,16 @@ export default function Home() {
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Link
             href="https://github.com/AudoraLabs/next-starter"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex h-11 items-center justify-center rounded-md bg-neutral-950 px-6 text-sm font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200"
           >
             Get Started
           </Link>
           <Link
             href="https://github.com/AudoraLabs"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-500 dark:hover:text-white"
           >
             View on GitHub

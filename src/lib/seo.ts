@@ -1,17 +1,66 @@
-import type { WebSite, WithContext } from "schema-dts";
+import type {
+  WebSite,
+  Organization,
+  BreadcrumbList,
+  WithContext,
+} from "schema-dts";
 import type { Metadata, Viewport } from "next";
-import { SITE_CONFIG } from "@/config/site";
+import { SITE_CONFIG, META_THEME_COLORS } from "@/config/site";
 
-export function getWebSiteJsonLd(): WithContext<WebSite> {
+// Page-Specific Metadata
+interface PageMetadataProps {
+  title: string;
+  description?: string;
+  image?: string;
+  path?: string;
+}
+
+export function getPageMetadata({
+  title,
+  description,
+  image,
+  path = "",
+}: PageMetadataProps): Metadata {
+  const metaTitle = `${title} - ${SITE_CONFIG.name}`;
+  const metaDescription = description ?? SITE_CONFIG.description;
+  const metaImage = image ?? SITE_CONFIG.ogImage;
+  const sitePath = path
+    ? `${SITE_CONFIG.url.replace(/\/$/, "")}/${path.replace(/^\//, "")}`
+    : SITE_CONFIG.url;
+
   return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: SITE_CONFIG.name,
-    url: SITE_CONFIG.url,
-    alternateName: SITE_CONFIG.alternateNames,
+    metadataBase: new URL(SITE_CONFIG.url),
+    title,
+    description: metaDescription,
+    alternates: {
+      canonical: sitePath,
+    },
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription,
+      url: sitePath,
+      siteName: SITE_CONFIG.name,
+      images: [
+        {
+          url: metaImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      title: metaTitle,
+      description: metaDescription,
+      card: "summary_large_image",
+      images: [metaImage],
+    },
   };
 }
 
+// Default Site Metadata
 export function getMetadata(): Metadata {
   return {
     metadataBase: new URL(SITE_CONFIG.url),
@@ -79,10 +128,63 @@ export function getMetadata(): Metadata {
   };
 }
 
+// Viewport with Theme Colors
 export function getViewport(): Viewport {
   return {
     width: "device-width",
     initialScale: 1,
     maximumScale: 5,
+    themeColor: [
+      {
+        media: "(prefers-color-scheme: light)",
+        color: META_THEME_COLORS.light,
+      },
+      { media: "(prefers-color-scheme: dark)", color: META_THEME_COLORS.dark },
+    ],
+  };
+}
+
+// Structured Data (JSON-LD)
+export function getWebSiteJsonLd(): WithContext<WebSite> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.url,
+    alternateName: SITE_CONFIG.alternateNames,
+  };
+}
+
+export function getOrganizationJsonLd(): WithContext<Organization> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.url,
+    logo: `${SITE_CONFIG.url}/favicon/favicon.svg`,
+    sameAs: [
+      `https://twitter.com/${SITE_CONFIG.twitterHandle.replace("@", "")}`,
+      "https://github.com/AudoraLabs",
+    ],
+  };
+}
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export function getBreadcrumbJsonLd(
+  items: BreadcrumbItem[]
+): WithContext<BreadcrumbList> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
   };
 }

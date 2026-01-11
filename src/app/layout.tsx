@@ -1,7 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { getMetadata, getViewport, getWebSiteJsonLd } from "@/lib/seo";
+import {
+  getMetadata,
+  getViewport,
+  getWebSiteJsonLd,
+  getOrganizationJsonLd,
+} from "@/lib/seo";
 import "@/styles/globals.css";
 
 const geistSans = Geist({
@@ -22,6 +27,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = [getWebSiteJsonLd(), getOrganizationJsonLd()];
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -29,7 +36,7 @@ export default function RootLayout({
           id="schema-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(getWebSiteJsonLd()).replace(/</g, "\\u003c"),
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
           }}
         />
       </head>

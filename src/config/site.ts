@@ -13,6 +13,6 @@ export const SITE_CONFIG = {
 };
 
 export const META_THEME_COLORS = {
-  light: "#ffffff",
+  light: "#ededed",
   dark: "#09090b",
 };
