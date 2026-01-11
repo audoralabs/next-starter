@@ -1,119 +1,151 @@
 # next-starter
 
-An opinionated, production-ready Next.js starter maintained by AudoraLabs. This template reflects the tooling and conventions we use to ship products quickly without compromising on quality.
+A production-ready Next.js starter with enterprise-level SEO, security headers, and modern tooling. Clone, customize, and ship.
 
-## Why This Exists
+## Quick Start
 
-Starting a new project shouldn't mean spending a day configuring TypeScript, linting, formatting, and SEO defaults. This starter provides a clean foundation with sensible defaults so you can focus on building features.
+```bash
+bunx degit AudoraLabs/next-starter my-app
+cd my-app
+bun install
+bun dev
+```
 
-## Tech Stack
+Open [http://localhost:3000](http://localhost:3000) to see your app.
 
-- **Next.js 16** with App Router and React 19
-- **TypeScript** with strict mode enabled
-- **Bun** as the package manager and runtime
-- **Tailwind CSS 4** with PostCSS
-- **ESLint 9** flat config with Next.js rules
-- **Prettier** with Tailwind plugin
-- **React Compiler** enabled for automatic optimizations
+## What's Included
 
-## Features
+### Core Stack
 
-- SEO-ready with `robots.ts`, `sitemap.ts`, and Open Graph metadata
-- Title templates and metadataBase configured
-- Path alias `@/*` mapped to `./src/*`
-- Dark mode support via CSS custom properties
-- Geist font family pre-configured
+| Technology   | Version | Notes                          |
+| ------------ | ------- | ------------------------------ |
+| Next.js      | 16.1.1  | App Router, Turbopack enabled  |
+| React        | 19.2.3  | React Compiler enabled         |
+| TypeScript   | 5       | Strict mode                    |
+| Tailwind CSS | 4       | PostCSS, no config file needed |
+| Bun          | Latest  | Package manager and runtime    |
 
-## Folder Structure
+### SEO
+
+This starter ships with everything you need for search engine optimization:
+
+- **Open Graph & Twitter Cards** - Complete social sharing metadata
+- **Structured Data (JSON-LD)** - WebSite, Organization, and Breadcrumb schemas
+- **Dynamic robots.txt** - Generated from `robots.ts`
+- **Dynamic sitemap.xml** - Generated from `sitemap.ts`
+- **llms.txt** - AI-friendly documentation for LLM assistants
+- **Title Templates** - Consistent page titles with `%s - Site Name` pattern
+- **Canonical URLs** - Prevent duplicate content issues
+- **PWA Manifest** - Web app manifest with icons and screenshots
+
+### Security
+
+Pre-configured security headers in `next.config.ts`:
+
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `X-XSS-Protection: 1; mode=block`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `Permissions-Policy` - Camera, microphone, geolocation disabled
+
+### Developer Experience
+
+- **ESLint 9** - Flat config with Next.js rules
+- **Prettier** - With Tailwind CSS plugin for class sorting
+- **Husky** - Git hooks for pre-commit linting
+- **lint-staged** - Run linters on staged files only
+- **Path Alias** - `@/*` mapped to `./src/*`
+- **Type Checking** - Dedicated `check-types` script
+
+### UI
+
+- **Dark Mode** - System preference detection with next-themes
+- **Geist Font** - Pre-configured sans and mono variants
+- **cn() Utility** - Combines clsx and tailwind-merge
+
+## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── globals.css      # Tailwind imports and CSS variables
-│   ├── layout.tsx       # Root layout with metadata
-│   ├── page.tsx         # Home page
-│   ├── robots.ts        # robots.txt generation
-│   └── sitemap.ts       # Sitemap generation
+│   ├── layout.tsx          # Root layout with metadata and JSON-LD
+│   ├── page.tsx            # Home page
+│   ├── manifest.ts         # PWA web app manifest
+│   ├── robots.ts           # robots.txt generation
+│   ├── sitemap.ts          # sitemap.xml generation
+│   ├── llms.txt/           # AI-friendly summary
+│   └── llms-full.txt/      # AI-friendly full documentation
+├── components/
+│   ├── icons.tsx           # Icon components
+│   ├── theme-provider.tsx  # Theme context provider
+│   └── theme-toggle.tsx    # Dark/light mode toggle
+├── config/
+│   └── site.ts             # Site configuration exports
+├── data/
+│   ├── site.ts             # Site metadata (name, URL, description)
+│   └── llms.ts             # llms.txt content configuration
+├── lib/
+│   └── seo.ts              # SEO utilities and JSON-LD generators
+├── styles/
+│   └── globals.css         # Global styles and Tailwind imports
+└── utils/
+    └── cn.ts               # Class name merge utility
 ```
 
-## Usage
+## Configuration
 
-Clone this template using degit:
+### Site Metadata
 
-```bash
-bunx degit AudoraLabs/next-starter my-project
-cd my-project
-bun install
+Edit `src/data/site.ts` to customize your site:
+
+```typescript
+const SITE_DATA = {
+  name: "my-app",
+  url: "https://my-app.com",
+  ogImage: "https://my-app.com/og.png",
+  tagline: "Your tagline here",
+  description: "Your full description",
+  twitterHandle: "@myapp",
+  keywords: ["keyword1", "keyword2"],
+};
 ```
 
-## Development
+### LLMs.txt Content
 
-```bash
-# Start development server
-bun dev
+Edit `src/data/llms.ts` to customize AI-friendly documentation.
 
-# Build for production
-bun run build
+## Scripts
 
-# Start production server
-bun start
+| Command                | Description                      |
+| ---------------------- | -------------------------------- |
+| `bun dev`              | Start dev server with Turbopack  |
+| `bun run build`        | Build for production             |
+| `bun start`            | Start production server          |
+| `bun lint`             | Run ESLint                       |
+| `bun lint:fix`         | Run ESLint with auto-fix         |
+| `bun check-types`      | Run TypeScript type checking     |
+| `bun format`           | Format all files with Prettier   |
+| `bun format:check`     | Check formatting without writing |
+| `bun clean`            | Remove .next and node_modules    |
+| `bun upgrade:next`     | Upgrade Next.js to latest        |
+| `bun upgrade:tailwind` | Upgrade Tailwind CSS             |
 
-# Lint code
-bun lint
+## Why These Choices
 
-# Format code
-bun format
+**Bun** - Faster installs, native TypeScript, smaller lockfile.
 
-# Check formatting
-bun format:check
-```
+**App Router** - Server components, streaming, better layouts. Pages Router is legacy.
 
-## Environment Variables
+**React Compiler** - Automatic memoization without manual `useMemo`/`useCallback`.
 
-Copy `.env.example` to `.env` and configure:
+**Tailwind CSS 4** - Native CSS layers, `@theme` directive, no config file for basics.
 
-```bash
-cp .env.example .env
-```
+**ESLint Flat Config** - Cleaner, more composable than `.eslintrc` files.
 
-| Variable               | Description                                      |
-| ---------------------- | ------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL` | Base URL for sitemap, robots.txt, and Open Graph |
+**No Component Library** - Start clean, add shadcn/ui or Radix when needed.
 
-## SEO Configuration
-
-This starter includes production-ready SEO defaults:
-
-- **`layout.tsx`** exports metadata with Open Graph and Twitter card support
-- **`robots.ts`** generates robots.txt with sitemap reference
-- **`sitemap.ts`** provides a dynamic sitemap template
-
-Update the metadata in `layout.tsx` and set `NEXT_PUBLIC_SITE_URL` to configure for your domain.
-
-## Opinionated Decisions
-
-**Bun over npm/yarn/pnpm**
-Faster installs, native TypeScript execution, and fewer moving parts. The lockfile is smaller and the CLI is simpler.
-
-**App Router only**
-The Pages Router is legacy. App Router provides better layouts, streaming, and server components out of the box.
-
-**React Compiler enabled**
-Automatic memoization without manual `useMemo` and `useCallback`. Less code, fewer bugs.
-
-**Tailwind CSS 4**
-Native CSS cascade layers, no config file needed for basic usage, and the new `@theme` directive for design tokens.
-
-**ESLint flat config**
-The new config format is cleaner and more composable. No `.eslintrc` files.
-
-**No component library**
-We prefer building UI from scratch with Tailwind. Add shadcn/ui or Radix if your project needs it.
-
-## How We Use This
-
-At AudoraLabs, this template is our starting point for client projects and internal tools. We clone it, customize the metadata, and start building. The conventions here reflect what we've found works well across dozens of projects.
+**Turbopack** - Faster dev server and builds.
 
 ## License
 
-MIT
+[MIT](LICENSE)

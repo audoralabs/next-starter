@@ -46,6 +46,22 @@ export default function Home() {
           </code>
         </div>
       </main>
+
+      <footer className="absolute right-0 bottom-6 left-0 flex justify-center gap-4">
+        <Link
+          href="/llms.txt"
+          className="text-xs text-neutral-500 transition-colors hover:text-neutral-950 dark:hover:text-white"
+        >
+          llms.txt
+        </Link>
+        <span className="text-neutral-300 dark:text-neutral-700">·</span>
+        <Link
+          href="/llms-full.txt"
+          className="text-xs text-neutral-500 transition-colors hover:text-neutral-950 dark:hover:text-white"
+        >
+          llms-full.txt
+        </Link>
+      </footer>
     </div>
   );
 }
