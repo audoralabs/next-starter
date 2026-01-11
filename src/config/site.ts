@@ -11,3 +11,8 @@ export const SITE_CONFIG = {
   twitterHandle: SITE_DATA.twitterHandle,
   keywords: SITE_DATA.keywords,
 };
+
+export const META_THEME_COLORS = {
+  light: "#ffffff",
+  dark: "#09090b",
+};

@@ -1,6 +1,6 @@
 import type { WebSite, WithContext } from "schema-dts";
 import type { Metadata, Viewport } from "next";
-import { SITE_CONFIG } from "@/config";
+import { SITE_CONFIG } from "@/config/site";
 
 export function getWebSiteJsonLd(): WithContext<WebSite> {
   return {

@@ -70,14 +70,14 @@ bun format:check
 
 ## Environment Variables
 
-Copy `.env.example` to `.env.local` and configure:
+Copy `.env.example` to `.env` and configure:
 
 ```bash
-cp .env.example .env.local
+cp .env.example .env
 ```
 
-| Variable | Description |
-|----------|-------------|
+| Variable               | Description                                      |
+| ---------------------- | ------------------------------------------------ |
 | `NEXT_PUBLIC_SITE_URL` | Base URL for sitemap, robots.txt, and Open Graph |
 
 ## SEO Configuration
