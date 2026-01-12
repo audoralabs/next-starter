@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { CopyableCode } from "@/components/copyable-code";
 
 export default function Home() {
   return (
@@ -39,12 +40,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="mx-auto mt-12 max-w-md rounded-md border border-neutral-200 bg-neutral-200 p-4 dark:border-neutral-800 dark:bg-neutral-900">
-          <code className="text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-            <span className="text-neutral-400 dark:text-neutral-600">$</span>{" "}
-            bunx degit audoralabs/next-starter my-app
-          </code>
-        </div>
+        <CopyableCode code="bunx degit audoralabs/next-starter my-app" />
       </main>
 
       <footer className="absolute right-0 bottom-6 left-0 flex justify-center gap-4">
