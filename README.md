@@ -5,8 +5,9 @@ A production-ready Next.js starter with enterprise-level SEO, security headers, 
 ## Quick Start
 
 ```bash
-bunx degit AudoraLabs/next-starter my-app
+bunx degit audoralabs/next-starter my-app
 cd my-app
+git init
 bun install
 bun dev
 ```
@@ -55,6 +56,10 @@ Pre-configured security headers in `next.config.ts`:
 - **Husky** - Git hooks for pre-commit linting
 - **lint-staged** - Run linters on staged files only
 - **Path Alias** - `@/*` mapped to `./src/*`
+
+> **Note:** Git hooks (Husky) are installed automatically when a Git repository is present.
+> If you initialize Git after installing dependencies, re-run `bun install` to enable hooks.
+
 - **Type Checking** - Dedicated `check-types` script
 
 ### UI

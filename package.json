@@ -15,7 +15,7 @@
     "clean": "rm -rf .next node_modules",
     "upgrade:next": "bunx @next/codemod@latest upgrade latest",
     "upgrade:tailwind": "bunx @tailwindcss/upgrade@latest",
-    "prepare": "husky"
+    "prepare": "git rev-parse --is-inside-work-tree > /dev/null 2>&1 && husky || true"
   },
   "dependencies": {
     "clsx": "^2.1.1",
